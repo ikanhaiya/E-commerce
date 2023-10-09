@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 
 import HomePage from './pages/homepage/homepage.component';
@@ -15,9 +15,9 @@ function App() {
     <div>
 
       <Routes>
-        <Route  path='/' element={<HomePage />} />
-        <Route  path='/shop' element={<ShopPage />} />
-      </Routes> 
+        <Route path='/' element={<HomePage />} />
+        <Route path='/shop' element={<ShopPage />} />
+      </Routes>
     </div>
   );
 }
