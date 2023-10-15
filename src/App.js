@@ -9,7 +9,7 @@ import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
 
-import { auth } from './firebase/firebase.utils'; // using this we want to store state of user in our APP
+import { auth,createUserProfileDocument } from './firebase/firebase.utils'; // using this we want to store state of user in our APP
 
 class  App extends React.Component {
 
@@ -28,10 +28,8 @@ class  App extends React.Component {
     // onAuthStateChanged is function provided by auth service of firbase.
     // it take function as parameter telling what the state of the Auth on our firebase project is
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {  // subscription open
-      this.setState({ currentUser: user});
-
-      console.log(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {  // subscription open
+      createUserProfileDocument(user);
     });
   }
 

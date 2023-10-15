@@ -13,6 +13,48 @@ const config = {
     measurementId: "G-09LC51649H"
   };
 
+  export const createUserProfileDocument = async (userAuth, additonalData) => {
+    
+    if(!userAuth) return;
+     
+    // firestore always gives back object it is queryrefrence or querySnapshot 
+    
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+    const snapShot = await userRef.get();
+
+    // console.log(snapShot)
+
+    if(!snapShot.exists){
+      // creating data at location in firestore by userAuth 
+      // inorder for us to CRUD we have to use document refrence object not snapshot(it represents only data)
+      
+      // data wanted to store: displayName ,email from userAuth
+
+      const {displayName, email} = userAuth;
+      
+      const createdAt = new Date(); // I want to store when data was created
+      // Date() object gives current date current time when it was created
+      
+      try{
+
+        await userRef.set({
+          displayName, 
+          email,
+          createdAt,
+          ...additonalData
+        })
+      }
+
+      catch(error){
+         console.log("error creating user", error.message);
+      }
+    }
+
+    return userRef;
+
+  };
+
   firebase.initializeApp(config);
 
   // configuring firebase utility that we get these are the ones 
