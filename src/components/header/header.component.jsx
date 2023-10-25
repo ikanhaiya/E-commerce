@@ -26,11 +26,11 @@ const Header = ({currentUser}) => (
               // if not signed in the currentUser==null and this will be treated as false resulting <div>sign in </div>
               // will render.
                 currentUser ?
-                <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
+                (<div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>)
                 :
-                <Link className="option" to='/signin'>
+                (<Link className="option" to='/signin'>
                     SIGN IN
-                </Link>
+                </Link>)
             }
         </div>
 

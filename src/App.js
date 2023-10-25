@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { Route, Routes } from 'react-router-dom';
+import {  Route, Routes } from 'react-router-dom';
 
 
 import HomePage from './pages/homepage/homepage.component';
@@ -19,6 +19,8 @@ class App extends React.Component {
     this.state = {
       currentUser: null
     }
+
+
   }
 
   unsubscribeFromAuth = null
@@ -43,9 +45,9 @@ class App extends React.Component {
               id: snapShot.id,
               ...snapShot.data() // get back object representing the values
             }
-
+           
           });
-      
+         console.log(this.state);
         });
         
       }
