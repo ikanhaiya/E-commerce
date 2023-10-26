@@ -6,6 +6,8 @@ import { ReactComponent as Logo } from '../../assests/084 crown.svg';
 
 import { auth } from "../../firebase/firebase.utils";
 
+import { connect } from "react-redux";  // it lets us modify our component to have access to 
+
 
 import './header.styles.scss';
 
@@ -35,6 +37,13 @@ const Header = ({currentUser}) => (
         </div>
 
     </div>
-)
+);
+// this naming can be anything but mapStateToProps is standard with redux codebases
 
-export default Header;
+const mapStateToProps = state => ({
+     
+    currentUser: state.user.currentUser
+  
+}); // this function will allow us to access the state(begin our root reducer specificaly)
+
+export default connect(mapStateToProps)(Header);
