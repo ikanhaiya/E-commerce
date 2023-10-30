@@ -10,8 +10,10 @@ import { connect } from "react-redux";  // it lets us modify our component to ha
 
 import CartIcon from "../cart-icon/cart-icon.component";
 
+import CartDropDown from "../cart-dropdown/cart-dropdown.component";
+
 import './header.styles.scss';
-const Header = ({currentUser}) => (
+const Header = ({currentUser,hidden}) => (
     <div className="header">
         <Link className="logo-container" to="/">
             <Logo className="logo" />
@@ -37,14 +39,18 @@ const Header = ({currentUser}) => (
 
             <CartIcon />
         </div>
-
+        {
+            hidden ? null :
+        <CartDropDown />
+        }
     </div>
 );
 // this naming can be anything but mapStateToProps is standard with redux codebases
 
-const mapStateToProps = state => ({
+const mapStateToProps = ({user: { currentUser }, cart: {hidden}}) => ({
      
-    currentUser: state.user.currentUser
+    currentUser,
+    hidden
   
 }); // this function will allow us to access the state(begin our root reducer specificaly)
 
