@@ -8,9 +8,9 @@ import { auth } from "../../firebase/firebase.utils";
 
 import { connect } from "react-redux";  // it lets us modify our component to have access to 
 
+import CartIcon from "../cart-icon/cart-icon.component";
 
 import './header.styles.scss';
-
 const Header = ({currentUser}) => (
     <div className="header">
         <Link className="logo-container" to="/">
@@ -34,6 +34,8 @@ const Header = ({currentUser}) => (
                     SIGN IN
                 </Link>)
             }
+
+            <CartIcon />
         </div>
 
     </div>

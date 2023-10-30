@@ -43,6 +43,8 @@
   "devDependencies": {
     "dart-sass": "^1.25.0",
     "node-sass-install": "^1.0.2",
-    "sass": "^1.69.4"
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "webpack": "^5.89.0"
   }
 }
