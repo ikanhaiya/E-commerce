@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import HomePage from './pages/homepage/homepage.component';
@@ -12,6 +12,7 @@ import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'; // using this we want to store state of user in our APP
 
 import { setCurrentUser } from './redux/user/user.actions';
+import userReducer  from './redux/user/user.reducer';
 class App extends React.Component {
 
   // constructor() {
@@ -48,7 +49,7 @@ class App extends React.Component {
             id: snapShot.id,
             ...snapShot.data() // get back object representing the values   
           });
-          //console.log(this.state);
+          // console.log(this.state);
         });
 
       }
@@ -80,18 +81,28 @@ class App extends React.Component {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/shop' element={<ShopPage />} />
-          <Route path='/signin' element={<SignInAndSignUpPage />} />
+          <Route path='/signin' element={this.props.currentUser ? (<Navigate to='/'/>) : <SignInAndSignUpPage/>}/>
+        
         </Routes>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+   currentUser: user.currentUser
+});
+  
+
+
 const mapDispatchToProps = dispatch => ({
 
-  setCurrentUser: user => dispatch(setCurrentUser(user))  // dispatch tells redux that wahatever object has been passed it will be action object 
-  //that redux will pass to every reducer
+  setCurrentUser: user => dispatch(setCurrentUser(user))  // dispatch tells redux that wahatever object has been passed in 
+  //it will be action object that `redux will pass to every reducer
   // user will be used as payload ,setCurrentUser returns object 
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (App);
